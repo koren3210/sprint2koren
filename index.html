@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>meme project</title>
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+</head>
+
+
+<body onload="onInit()">
+
+
+
+
+
+  <div class="modal">
+
+    <div class="content">
+      <span>Enter Image URL</span>
+      <input name="url" />
+      <span>Choose apropiate keyWord:</span>
+      <input name="key"></input>
+      <button onclick="onSumbit();onOpenModal()">submit</button>
+    </div>
+  </div>
+
+  <!-- navigation bar  -->
+  <header class="main-header">
+
+    <div class="header-content main-layout flex align-center space-between">
+      <div class="logo"><img src="img/LOGO.png"></div>
+
+      <button class="menu" onclick="onToggleMenu(this)" aria-label="Main Menu">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <path class="line line1"
+            d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+          <path class="line line2" d="M 20,50 H 80" />
+          <path class="line line3"
+            d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+        </svg>
+      </button>
+
+
+      <ul class="main-nav  flex clean-list">
+        <li><a href="#deatiles">About</a></li>
+        <li><a onclick="onOpenGallery()" href="#">Gallery</a></li>
+        <li><a onclick="onOpenMems()" href="#">My Mems</a></li>
+      </ul>
+    </div>
+
+  </header>
+
+
+  <!-- main page Gallery presenation -->
+
+  <div class="main-page">
+    <div class="screen" onclick="onToggleMenu()"></div>
+
+
+    <div class="search-div main-layout flex align-center">
+      <div class="search align-center">
+        <input type="text" class="searchTerm" placeholder="Enter search keyword">
+        <button type="submit" class="searchButton">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+      <div class="add-img trigger" onclick="onOpenModal()">
+        <i class="fa fa-plus"></i>
+      </div>
+    </div>
+  </div>
+
+
+
+  <main class="gallery main-layout">
+    <section class="mems">
+    </section>
+
+  </main>
+
+  <main class="my-memes main-layout">
+    <section class="memes-display">
+    </section>
+  </main>
+
+  <main class="editor">
+    <div class="canvas-container">
+      <canvas id="my-canvas" height="450" width="450"></canvas>
+    </div>
+    <section class="edit-options flex">
+      <input class="input-meme" type="text" onkeyup="onSetText(this.value)">
+      <div class="extra-options flex">
+        <button class="btn-switch pushable" onclick="onSwitchLine()"><span class="front"><img
+              src="img/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+        <button class="btn-add pushable" onclick="onAddLine()"><span class="front"><img src="img/add.png"
+              alt=""></span></button>
+        <button class="btn-remove pushable" onclick="onRemoveLine()"><span class="front"><img
+              src="img/trash.png"></span></button>
+      </div>
+
+      <div class="extra-options">
+        <button class="pushable" onclick="onFontSize('+')"><span class="front"><img
+              src="img/increase font - icon.png"></span></button>
+        <button class="pushable" onclick="onFontSize('-')"><span class="front"><img
+              src="img/decrease font - icon.png"></span></button>
+        <button class="pushable" onclick="onSetTextAlignment('start')"><span class="front"><img
+              src="img/align-to-left.png"></span></button>
+        <button class="pushable" onclick="onSetTextAlignment('center')"><span class="front"><img
+              src="img/center-text-alignment.png"></span></button>
+        <button class="pushable" onclick="onSetTextAlignment('end')"><span class="front"><img
+              src="img/align-to-right.png"></span></button>
+      </div>
+      <div class="extra-options">
+        <button class="setting-btn pushable" onclick="onChangeTextPosX(-1)"><span class="front">⬅️</span></button>
+        <button class="setting-btn pushable" onclick="onChangeTextPosY(-1)"><span class="front">⬆️</span></button>
+        <button class="setting-btn pushable" onclick="onChangeTextPosY(+1)"><span class="front">⬇️</span></button>
+        <button class="setting-btn pushable" onclick="onChangeTextPosX(+1)"><span class="front">➡️</span></button>
+        <button class="pushable" onclick="onRightTxt()"><span class="front"><img src="img/text stroke.png"></button>
+
+      </div>
+      <div class="select">
+        <select name="font" onchange="onSetFont(this.value)">
+          <option value="impact">Impact</option>
+          <option value="sans-serif">sans-serif</option>
+          <option value="times new roman">time new roman</option>
+        </select>
+      </div>
+
+      <div class="sticker-container flex">
+        <img src="img/s1.png" onclick="onSetSticker('s1')">
+        <img src="img/s2.png" onclick="onSetSticker('s2')">
+        <img src="img/s3.png" onclick="onSetSticker('s3')">
+        <img src="img/s4.png" onclick="onSetSticker('s4')">
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+
+  <footer>
+    <div class="memes-manage">
+
+
+      <a href="#" onclick="onSaveMeme()" class="myButton">save</a>
+      <a href="#" onclick="fbs_click()" class="myButton">share</a>
+      <a href="#" class="myButton" onclick="onDownloadImg(this)">download</a>
+
+    </div>
+
+    <div class="deatiles flex align-center" id="deatiles" style="gap: 10px;">
+
+      <img class="me-img main-layout" src="https://ca.slack-edge.com/T021743D5T8-U025LJVAX42-ea2f51e8112f-512" alt="">
+      <div class="me-text main-layout">
+        <h2>Koren turgeman</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut
+          eaque, laboriosam veritatis, quos non quis ad perspiciatis,
+          .</p>
+        <ul class="social-nav clean-list flex">
+          <li class="footer-link facebook"><a href="social-facebook" class="fab fa-facebook-f"></a></li>
+          <li class="footer-link twitter"><a href="social-twitter" class="fab fa-twitter"></a></li>
+          <li class="footer-link git"><a href="social-github" class="fab fa-github"></a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="page-footer flex align-center">
+      <div class="logo"><img src="img/LOGO.png"></div>
+      <small>© 2020 Memgen.com - All Rights Reserved
+        <span>memegen.com</span></small>
+    </div>
+
+  </footer>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://kit.fontawesome.com/4189113ded.js" crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
+  <script src="js/meme-service.js"></script>
+  <script src="js/memsStorage.js"></script>
+  <script src="js/storage-service.js"></script>
+  <script src="js/galleryStorage.js"></script>
+</body>
+
+
+</html>
